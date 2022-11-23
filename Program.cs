@@ -14,6 +14,8 @@ namespace RhythmDatabase
 
         static void AddBand()
         {
+          var context = new RhythmContext();
+          
             var name = PromptForString("Name of Band: ");
             var country = PromptForString("Country of Origin: ");
             var members = PromptForString("Number of Members: ");
@@ -54,7 +56,9 @@ static string MenuChoice()
       var menuSelection = MenuChoice();
       switch(menuSelection)
       {
-        // case "1":
+        case "1":
+        AddBand();
+        break;
         
       }
    
