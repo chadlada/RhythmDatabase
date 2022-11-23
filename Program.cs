@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace RhythmDatabase
 {
@@ -12,17 +14,41 @@ namespace RhythmDatabase
             return userInput;
         }
 
+        static int PromptForInteger(string prompt)
+        {
+            Console.Write(prompt);
+            int userInput;
+            var isThisGoodInput = Int32.TryParse(Console.ReadLine(), out userInput);
+
+            if (isThisGoodInput)
+            {
+                return userInput;
+            }
+            else
+            {
+                Console.WriteLine("Sorry, that isn't a valid input, I'm using 0 as your answer.");
+                return 0;
+            }
+        }
         static void AddBand()
         {
           var context = new RhythmContext();
+          Band newBand = new Band();
+
           
-            var name = PromptForString("Name of Band: ");
-            var country = PromptForString("Country of Origin: ");
-            var members = PromptForString("Number of Members: ");
-            var website = PromptForString("Website: ");
-            var genre = PromptForString("Genre: ");
-            var signed = PromptForString("Are they signed?: ");
-            var contactName = PromptForString("Contact Name ");
+
+            newBand.Name = PromptForString("Name of Band: ");
+            newBand.CountryOfOrigin = PromptForString("Country of Origin: ");
+            newBand.NumberOfMembers = PromptForInteger("Number of Members: ");
+            newBand.Website = PromptForString("Website: ");
+            newBand.Genre = PromptForString("Genre: ");
+            Console.Write("\nIf the band is signed, type 'true' then press ENTER\nor\nIf the band isn't signed, type false then press ENTER: ");
+            var isSignedInput = Console.ReadLine().ToLower();
+            newBand.IsSigned = bool.Parse(isSignedInput);
+            newBand.ContactName = PromptForString("Contact Name ");
+
+            context.Bands.Add(newBand);
+            context.SaveChanges();
         }
 static string MenuChoice()
 {

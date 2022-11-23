@@ -1,3 +1,5 @@
+using System;
+
 namespace RhythmDatabase
 {
     public class Album
