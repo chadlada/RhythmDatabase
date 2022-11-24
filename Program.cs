@@ -60,6 +60,54 @@ static void ViewAllBands()
     Console.WriteLine($"\n{band.Name}\n");
   }
 }
+ 
+ static void AddAlbumBand()
+ {
+var context = new RhythmContext();
+Album newAlbum = new Album();
+
+newAlbum.Title = PromptForString("What is the title of the album you want to add?");
+
+Console.WriteLine("Is the album explicit? \n If Yes, type TRUE \n If not, type FALSE");
+var isExplicitInput = Console.ReadLine().ToLower();
+newAlbum.IsExplicit = bool.Parse(isExplicitInput);
+
+Console.WriteLine("What is the release date of the album? \n Please format YYYY/MM/DD");
+var newAlbumReleaseDate = Console.ReadLine();
+var releaseDateInput = DateTime.Parse(newAlbumReleaseDate);
+
+bool selectingBand = true;
+var bandForAlbum = new Band();
+
+while(selectingBand)
+{
+  var bandSelection = PromptForString("Type the name of the band you'd like to add then press ENTER: ");
+  if(context.Bands.FirstOrDefault(band => band.Name == bandSelection) != null)
+  {
+    bandForAlbum = context.Bands.FirstOrDefault(band => band.Name == bandSelection);
+    selectingBand = false;
+  }
+  else
+  {
+    Console.WriteLine("There is no band in the database by that name ");
+    Console.WriteLine("Please try again");
+  }
+
+  newAlbum.BandId = bandForAlbum.Id;
+  context.Albums.Add(newAlbum);
+  context.SaveChanges();
+
+  Console.WriteLine("\n Added To Database \n");
+  Console.WriteLine("Press ENTER to return to main menu");
+  var quitToMenu = Console.ReadLine();
+  Console.Clear();
+
+
+
+}
+
+
+ }
 
 static string MenuChoice()
 {
@@ -99,9 +147,9 @@ static string MenuChoice()
         case "2":
         ViewAllBands();
         break;
-        // case "3":
-        // AddBand();
-        // break;
+        case "3":
+        AddAlbumBand();
+        break;
         // case "4":
         // AddBand();
         // break;
