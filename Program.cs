@@ -50,6 +50,17 @@ namespace RhythmDatabase
             context.Bands.Add(newBand);
             context.SaveChanges();
         }
+
+static void ViewAllBands()
+{
+  var context = new RhythmContext();
+
+  foreach(var band in context.Bands)
+  {
+    Console.WriteLine($"\n{band.Name}\n");
+  }
+}
+
 static string MenuChoice()
 {
             Console.WriteLine("Choose an option:");
@@ -85,6 +96,36 @@ static string MenuChoice()
         case "1":
         AddBand();
         break;
+        case "2":
+        ViewAllBands();
+        break;
+        // case "3":
+        // AddBand();
+        // break;
+        // case "4":
+        // AddBand();
+        // break;
+        // case "5":
+        // AddBand();
+        // break;
+        // case "6":
+        // AddBand();
+        // break;
+        // case "7":
+        // AddBand();
+        // break;
+        // case "8":
+        // AddBand();
+        // break;
+        // case "9":
+        // AddBand();
+        // break;
+        // case "10":
+        // AddBand();
+        // break;
+        // case "11":
+        // AddBand();
+        // break;
         
       }
    
