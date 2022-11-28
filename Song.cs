@@ -7,7 +7,5 @@ namespace RhythmDatabase
         public string Title { get; set; }
         public string Duration { get; set; }
         public int AlbumId { get; set; }
-
-        public Band Band { get; set; }
     }
 }

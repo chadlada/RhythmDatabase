@@ -109,19 +109,45 @@ while(selectingBand)
 
  }
 
-// static void AddSongToAlbum()
-// {
-//   var context = new RhythmContext();
-//   Song newSong = new Song;
+static void AddSongToAlbum()
+{
+  var context = new RhythmContext();
+  Song newSong = new Song();
 
-//   newSong.Title = PromptForString("What song would you like to add");
-//   newSong.TrackNumber = PromptForInteger("What is the track number of the song?");
-//   newSong.Duration = PromptForInteger("What is the duration of the song?");
+  newSong.Title = PromptForString("What song would you like to add");
+  newSong.TrackNumber = PromptForInteger("What is the track number of the song?");
+  newSong.Duration = PromptForString("What is the duration of the song?");
 
-//   var selectingAlbum = true;
-//   var albumForsong = new Album;
+  var selectingAlbum = true;
+  var albumForSong = new Album();
 
-// }
+  while(selectingAlbum)
+  {
+    var albumSelection = PromptForString("Which album would you like to add this song to?");
+
+if(context.Albums.FirstOrDefault(album => album.Title == albumSelection) !=null)
+{
+  albumForSong = context.Albums.FirstOrDefault(album => album.Title == albumSelection);
+  selectingAlbum = false;
+}
+else
+{
+  Console.WriteLine("There are no albums by that name. Try again. ");
+}
+
+  }
+
+Console.WriteLine($"{newSong.Title} has been added to {albumForSong.Title}");
+newSong.AlbumId = albumForSong.Id;
+context.Songs.Add(newSong);
+context.SaveChanges();
+
+Console.WriteLine("Press ENTER to return to main menu");
+var quiteToMenu = Console.ReadLine();
+Console.Clear();
+
+}
+
 static string MenuChoice()
 {
             Console.WriteLine("Choose an option:");
@@ -166,9 +192,9 @@ while(keepGoing)
         case "3":
         AddAlbumBand();
         break;
-        // case "4":
-        // AddBand();
-        // break;
+        case "4":
+        AddSongToAlbum();
+        break;
         // case "5":
         // AddBand();
         // break;
