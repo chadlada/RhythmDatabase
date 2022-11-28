@@ -148,6 +148,34 @@ Console.Clear();
 
 }
 
+static void LetBandGo() 
+{
+  var context = new RhythmContext();
+var selectingBand = true;
+var selectingBandToRemove = new Band();
+
+while(selectingBand)
+{
+  var bandToRemove = PromptForString("Which band would you like to remove from label?");
+
+  if(context.Bands.FirstOrDefault(band => band.Name == bandToRemove) !=null)
+  {
+selectingBandToRemove = context.Bands.FirstOrDefault(band => band.Name == bandToRemove);
+selectingBand = false;
+  }
+  else
+  {
+    Console.WriteLine("There is no band by that name. Please try again");
+  }
+}
+selectingBandToRemove.IsSigned = false;
+Console.WriteLine($"{selectingBandToRemove.Name} removed");
+context.SaveChanges();
+Console.WriteLine("Press ENTER to return to main menu");
+var quitToMenu = Console.ReadLine();
+Console.Clear();
+}
+
 static string MenuChoice()
 {
             Console.WriteLine("Choose an option:");
@@ -195,9 +223,9 @@ while(keepGoing)
         case "4":
         AddSongToAlbum();
         break;
-        // case "5":
-        // AddBand();
-        // break;
+        case "5":
+        LetBandGo();
+        break;
         // case "6":
         // AddBand();
         // break;
