@@ -109,6 +109,19 @@ while(selectingBand)
 
  }
 
+// static void AddSongToAlbum()
+// {
+//   var context = new RhythmContext();
+//   Song newSong = new Song;
+
+//   newSong.Title = PromptForString("What song would you like to add");
+//   newSong.TrackNumber = PromptForInteger("What is the track number of the song?");
+//   newSong.Duration = PromptForInteger("What is the duration of the song?");
+
+//   var selectingAlbum = true;
+//   var albumForsong = new Album;
+
+// }
 static string MenuChoice()
 {
             Console.WriteLine("Choose an option:");
@@ -136,8 +149,11 @@ static string MenuChoice()
       Console.WriteLine("Welcome to Rhythm Records!!!");
       Console.WriteLine("");
       Console.WriteLine("");
-      // MenuChoice();
 
+
+var keepGoing = true;
+while(keepGoing)
+{
       var menuSelection = MenuChoice();
       switch(menuSelection)
       {
@@ -176,7 +192,7 @@ static string MenuChoice()
         // break;
         
       }
-   
+}
     }
   }
 }
